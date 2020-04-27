@@ -96,25 +96,33 @@ public class Maze {
         boolean isInMaze() {
             // TODO: Fill this in. Return whether the row and column is a legal
             // position in this maze.
-            /*
-            if (this.row < 0 || this.row > && this.column){
-
+            int totalRow = Maze.this.getHeight();
+            int totalCol = Maze.this.getWidth();
+            if ((row < 0 || row >= totalRow) && (column < 0 || this.column >= totalCol)){
+              return false;
             }
-            */
-            return true;
 
         }
 
-        boolean canBeMovedTo() {
+        boolean canBeMovedTo(int i, int j) {
             // TODO: Fill this in. You can move to a space only if it is inside the
             // maze and the cell is open or contains the cheese.
-            return true;
+
+            if (Maze.this.cells[i][j].isInMaze() && (Maze.this.cells[i][j] = Cell.OPEN || Maze.this.cells[i][j] = Cell.CHEESE)){
+              // initialRatLocation = Maze.this.cells[i][j];
+              return true;
+            }
+            // return true;
         }
 
         boolean hasCheese() {
             // TODO: Fill this in. Returns whether the cell has the cheese. You can
             // use the contents() method to help you here.
-            return true;
+            /*
+            if (Maze.this.cells[i][j].contentEquals(Cell.CHEESE)){
+              return true;
+            }
+            */
         }
 
         Location above() {

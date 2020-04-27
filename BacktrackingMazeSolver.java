@@ -10,6 +10,9 @@ public class BacktrackingMazeSolver {
 
         // TODO - if listener is null, throw an IllegalArgumentException
         // saying "Listener cannot be null"
+        if (listener == null) {
+          throw IllegalArgumentException("Listener cannot be null");
+        }
 
         var path = new Stack<Maze.Location>();
 

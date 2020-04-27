@@ -15,6 +15,7 @@ public class Maze {
 
     private Location initialRatLocation;
     private Location initialCheeseLocation;
+    private boolean inputIsAllValid;
 
     /**
      * Builds and returns a new maze given a description in the form of an array
@@ -32,6 +33,33 @@ public class Maze {
         // perfectly rectanglar, not contain any illegal characters, have exactly
         // one rat (not less, not more), and have exactly one cheese (not less,
         // not more).
+        inputIsAllValid = true;
+        cells = new Cell[lines.length][];
+
+        for (int i = 0; i < lines.length; i++){
+          cells[i] = new Cell[lines[i].length()];
+          for (int j = 0; j < lines[i].length(); j++){
+            char aChar = lines[i].charAt(j);
+            switch (aChar){
+              case 'o':
+                  cells[i][j] = Cell.OPEN;
+                  break;
+              case 'w':
+                  cells[i][j] = Cell.WALL;
+                  break;
+              case 'r':
+                  cells[i][j] = Cell.RAT;
+                  initialRatLocation = new Location(i, j);
+                  break;
+              case 'c':
+                  cells[i][j] = Cell.CHEESE;
+                  initialCheeseLocation = new Location(i, j);
+                  break;
+              default:
+                  inputIsAllValid = false;
+            }
+          }
+        }
     }
 
     public static Maze fromString(final String description) {
@@ -61,26 +89,38 @@ public class Maze {
 
         Location(final int row, final int column) {
             // TODO: Fill this in, it's pretty easy.
+            this.row = row;
+            this.column = column;
         }
 
         boolean isInMaze() {
             // TODO: Fill this in. Return whether the row and column is a legal
             // position in this maze.
+            /*
+            if (this.row < 0 || this.row > && this.column){
+
+            }
+            */
+            return true;
+
         }
 
         boolean canBeMovedTo() {
             // TODO: Fill this in. You can move to a space only if it is inside the
             // maze and the cell is open or contains the cheese.
+            return true;
         }
 
         boolean hasCheese() {
             // TODO: Fill this in. Returns whether the cell has the cheese. You can
             // use the contents() method to help you here.
+            return true;
         }
 
         Location above() {
             // TODO: Fill this in. It should return a new location whose coordinates
             // are (1) the row above this location's row, and (2) the same column.
+
         }
 
         Location below() {
@@ -119,6 +159,16 @@ public class Maze {
 
         // This needs a constructor and a toString method. You might need to do some
         // research on Java enums.
+        private char shortCode;
+
+        Cell(char code) {
+          this.shortCode = code;
+        }
+
+        public char toChar() {
+          return this.shortCode;
+        }
+
     }
 
     public interface MazeListener {

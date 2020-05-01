@@ -151,41 +151,21 @@ public class Maze {
         boolean isInMaze() {
             // TODO: Fill this in. Return whether the row and column is a legal
             // position in this maze.
-            int totalRow = Maze.this.getHeight();
-            int totalCol = Maze.this.getWidth();
-            if (row < 0 && row >= totalRow && column < 0 && column >= totalCol){
-              return false;
-            }
-            else{
-              return true;
-            }
+            return row >= 0 && row < getHeight() && column >= 0 && column < getWidth();
 
         }
 
         boolean canBeMovedTo() {
             // TODO: Fill this in. You can move to a space only if it is inside the
             // maze and the cell is open or contains the cheese.
-
-            if (isInMaze()){
-              // initialRatLocation = Maze.this.cells[i][j];
-              return true;
-            }
-            else{
-              return false;
-            }
+            return isInMaze() && (contents() == Cell.OPEN || contents() == Cell.CHEESE);
             // return true;
         }
         // Do all the conditions here
         boolean hasCheese() {
             // TODO: Fill this in. Returns whether the cell has the cheese. You can
             // use the contents() method to help you here.
-            Cell aCell = contents();
-            if (aCell == Cell.CHEESE){
-              return true;
-            }
-            else {
-              return false;
-            }
+            return isInMaze() && contents() == Cell.CHEESE;
         }
         // Reverse the position or index
         Location above() {
@@ -259,8 +239,8 @@ public class Maze {
           this.shortCode = code;
         }
 
-        public char toChar() {
-          return this.shortCode;
+        public String toString() {
+          return Character.toString(shortCode);
         }
 
         // convert character to String

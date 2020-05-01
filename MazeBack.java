@@ -33,21 +33,11 @@ public class Maze {
         // perfectly rectanglar, not contain any illegal characters, have exactly
         // one rat (not less, not more), and have exactly one cheese (not less,
         // not more).
-
         inputIsAllValid = true;
-        int numOfUChars = 0;
-        int numOfRats = 0;
-        int numOfCheese = 0;
-        boolean isRectangular = true;
         cells = new Cell[lines.length][];
 
         for (int i = 0; i < lines.length; i++){
           cells[i] = new Cell[lines[i].length()];
-          if (i > 0){
-            if (lines[i].length() != lines[0].length()){
-              isRectangular = false;
-            }
-          }
           for (int j = 0; j < lines[i].length(); j++){
             char aChar = lines[i].charAt(j);
             switch (aChar){
@@ -60,49 +50,16 @@ public class Maze {
               case 'r':
                   cells[i][j] = Cell.RAT;
                   initialRatLocation = new Location(i, j);
-                  numOfRats++;
                   break;
               case 'c':
                   cells[i][j] = Cell.CHEESE;
                   initialCheeseLocation = new Location(i, j);
-                  numOfCheese++;
                   break;
               default:
-                  numOfUChars++;
                   inputIsAllValid = false;
             }
-
           }
-
         }
-        if(numOfRats != 1 || numOfCheese !=1 || numOfUChars > 0 || !isRectangular){
-          String aStr = genExceptionStr(numOfRats, numOfUChars, numOfCheese, isRectangular);
-          throw new IllegalArgumentException(aStr);
-        }
-    }
-
-    private String genExceptionStr(int numOfRats, int numOfUChars, int numOfCheese, boolean isRectangular){
-      if (!isRectangular){
-        return "Non-rectangular maze";
-      }
-      if (numOfUChars > 0){
-        return "There are unwanted characters";
-      }
-      if (numOfRats > 1){
-        return "Maze can only have one rat";
-      }
-      if (numOfRats == 0){
-        return "Maze has no rat";
-      }
-      if (numOfCheese > 1){
-        return "Maze can only have one cheese";
-      }
-      if (numOfCheese == 0){
-        return "Maze has no cheese";
-      }
-      else{
-        return "Empty String";
-      }
     }
 
     public static Maze fromString(final String description) {
@@ -153,7 +110,7 @@ public class Maze {
             // position in this maze.
             int totalRow = Maze.this.getHeight();
             int totalCol = Maze.this.getWidth();
-            if (row < 0 && row >= totalRow && column < 0 && column >= totalCol){
+            if ((row < 0 || row >= totalRow) && (column < 0 || this.column >= totalCol)){
               return false;
             }
             else{
@@ -175,7 +132,7 @@ public class Maze {
             }
             // return true;
         }
-        // Do all the conditions here
+
         boolean hasCheese() {
             // TODO: Fill this in. Returns whether the cell has the cheese. You can
             // use the contents() method to help you here.
@@ -187,20 +144,20 @@ public class Maze {
               return false;
             }
         }
-        // Reverse the position or index
+
         Location above() {
             // TODO: Fill this in. It should return a new location whose coordinates
             // are (1) the row above this location's row, and (2) the same column.
-            int newRow = row - 1;
+            int newRow = row + 1;
             int newCol = column;
             Location currentLoc = new Location(newRow, newCol);
             return currentLoc;
 
         }
-        // Reverse the position or index
+
         Location below() {
             // TODO: Fill this in. Return the location directly below this one.
-            int newRow = row + 1;
+            int newRow = row - 1;
             int newCol = column;
             Location currentLoc = new Location(newRow, newCol);
             return currentLoc;
@@ -262,8 +219,6 @@ public class Maze {
         public char toChar() {
           return this.shortCode;
         }
-
-        // convert character to String
 
     }
 

@@ -213,12 +213,7 @@ public class Maze {
         boolean isAt(final Location other) {
             // TODO: Fill this in. Returns whether this location and the other location have
             // the same row and column values.
-            if (other.row == row && other.column == column){
-              return true;
-            }
-            else{
-              return false;
-            }
+            return (other.row == row) && (other.column == column);
 
         }
     }
@@ -253,12 +248,12 @@ public class Maze {
 
     public int getWidth() {
         // TODO: Fill this in. The information comes from the cells array.
-        return cells.length;
+        return cells[0].length;
     }
 
     public int getHeight() {
         // TODO: Fill this in
-        return cells[0].length;
+        return cells.length;
     }
 
     public Location getInitialRatPosition() {

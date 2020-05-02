@@ -78,7 +78,7 @@ public class MazeTest extends TestSuite {
                 expectEqual(maze.getHeight(), 2);
                 expectEqual(maze.getInitialRatPosition().isAt(maze.new Location(0, 3)), true);
                 expectEqual(maze.getInitialCheesePosition().isAt(maze.new Location(1, 0)), true);
-                expectEqual(maze.toString(), "██ r███ █\nc     ███");
+                expectEqual(maze.toString(), "\u2588\u2588 r\u2588\u2588\u2588 \u2588\nc     \u2588\u2588\u2588");
             }),
             new Test("Backtracking Solver throws if listener is null", () -> expectThrows(
                 () -> {
@@ -106,4 +106,3 @@ public class MazeTest extends TestSuite {
         };
     }
 }
-

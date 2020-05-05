@@ -1,6 +1,6 @@
 import java.util.Stack;
 
-public class BacktrackingMazeSolver {
+public class BacktrackingMazeSolver{
 
     /**
      * Moves a rat from (x1,y1) to (x2,y2), filling in the cells as it goes, and
